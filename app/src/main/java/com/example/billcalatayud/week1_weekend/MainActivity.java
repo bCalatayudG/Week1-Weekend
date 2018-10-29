@@ -1,5 +1,6 @@
 package com.example.billcalatayud.week1_weekend;
 
+import android.graphics.Path;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName() + "_tag";
 
     Button one, two, three, four, five, six, seven, eight, nine, zero;
-    Button add, sub, mult, dot, div, ac, eq, sqr, p, s, oP, cP, fact;
+    Button add, sub, mult, dot, div, ac, eq, sqr, p, s, c, t, oP, cP, fact, perc;
 
     TextView tInput;
     TextView result;
@@ -61,9 +62,12 @@ public class MainActivity extends AppCompatActivity {
         sqr = findViewById(R.id.sqr);
         p=findViewById(R.id.p);
         s = findViewById(R.id.s);
+        c = findViewById(R.id.c);
+        t = findViewById(R.id.t);
         oP = findViewById(R.id.oP);
         cP = findViewById(R.id.cP);
         fact = findViewById(R.id.fact);
+        perc = findViewById(R.id.per);
 
         //Numbers listeners
         one.setOnClickListener(clicked(one));
@@ -98,16 +102,23 @@ public class MainActivity extends AppCompatActivity {
 
                 numStack = new OperandStack(tInput.length());
                 posStack = new PosfixStack(tInput.length());
-                operate();
+                try{
+                    operate();
+                }catch (Exception e){
+
+                }
             }
         });
 
+        perc.setOnClickListener(clicked(perc));
 
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             sqr.setOnClickListener(clicked(sqr));
             p.setOnClickListener(clicked(p));
             s.setOnClickListener(clicked(s));
+            c.setOnClickListener(clicked(c));
+            t.setOnClickListener((clicked(t)));
             oP.setOnClickListener(clicked(oP));
             cP.setOnClickListener(clicked(cP));
             fact.setOnClickListener(clicked(fact));
@@ -139,7 +150,21 @@ public class MainActivity extends AppCompatActivity {
         int i = 0;
         while (i < tInput.length()) {
             character = tInput.getText().toString().charAt(i);
-            if(character =='s'){
+            if(character == '%'){
+                Operator aux = new Operator('%');
+                OperaDosUltimos(aux);
+            }
+            else if (character == 't'){
+                Operator aux = new Operator('t');
+                i=i+2;
+                OperaDosUltimos(aux);
+            }
+            else if (character == 'c'){
+                Operator aux = new Operator('c');
+                i=i+2;
+                OperaDosUltimos(aux);
+            }
+            else if(character =='s'){
                 Operator aux = new Operator('s');
                 i=i+2;
                 OperaDosUltimos(aux);
@@ -260,10 +285,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case '_':
                 numStack.push(Math.pow(datoEnTope, 0.5));
+                break;
             case 's':
                 numStack.push(Math.sin(Math.toRadians(datoEnTope)));
+                break;
+            case 'c':
+                numStack.push(Math.cos(Math.toRadians(datoEnTope)));
+                break;
+            case 't':
+                numStack.push(Math.tan(Math.toRadians(datoEnTope)));
+                break;
             case '!':
                 numStack.push(factorial(datoEnTope));
+                break;
+            case '%':
+                numStack.push(datoEnTope / 100);
+                break;
         }
     }
 

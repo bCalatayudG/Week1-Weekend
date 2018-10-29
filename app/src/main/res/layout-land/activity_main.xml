@@ -150,6 +150,17 @@
         android:layout_marginBottom="48dp"
         android:text="sin" />
 
+    <!--button - cos -->
+    <Button
+        android:id="@+id/c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="558dp"
+        android:layout_marginBottom="48dp"
+        android:text="cos" />
+
     <!-- button - 4 -->
     <Button
         android:id="@+id/four"
@@ -204,6 +215,17 @@
         android:layout_marginStart="468dp"
         android:layout_marginBottom="101dp"
         android:text="P" />
+
+    <!-- button - Pi -->
+    <Button
+        android:id="@+id/t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="558dp"
+        android:layout_marginBottom="101dp"
+        android:text="tan" />
 
     <!-- button - 7 -->
     <Button
